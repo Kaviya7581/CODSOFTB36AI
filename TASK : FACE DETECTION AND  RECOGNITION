@@ -1,0 +1,51 @@
+#prompt: FACE DETECTION AND RECOGNITION
+#Develop an AI application that can detect and recognize faces in
+#images or videos. Use pre-trained face detection models like Haar
+#cascades or deep learning-based face detectors, and optionally
+#add face recognition capabilities using techniques like Siamese
+#networks or ArcFace.
+
+!pip install opencv-python
+import cv2
+
+#Load the cascade classifier for face detection
+#OpenCV comes with pre-trained Haar Cascades for face detection
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+def detect_faces(image_path):
+  """Detects faces in an image and draws rectangles around them."""
+  img = cv2.imread(image_path)
+  if img is None:
+    print(f"Error: Could not read image from {image_path}")
+    return
+
+  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+  #Detect faces in the image
+  faces = face_cascade.detectMultiScale(
+      gray,
+      scaleFactor=1.1,
+      minNeighbors=5,
+      minSize=(30, 30),
+      flags=cv2.CASCADE_SCALE_IMAGE
+  )
+
+  print(f"Found {len(faces)} faces in {image_path}")
+
+  #Draw a rectangle around the faces
+  for (x, y, w, h) in faces:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+  output_path = 'output_' + image_path.split('/')[-1]
+  cv2.imwrite(output_path, img)
+  print(f"Output image with detected faces saved to {output_path}")
+
+
+try:
+  #Create a dummy black image
+  dummy_img = np.zeros((500, 500, 3), dtype=np.uint8)
+  dummy_image_path = 'dummy_image.jpg'
+  cv2.imwrite(dummy_image_path, dummy_img)
+  print(f"Created dummy image: {dummy_image_path}")
+  detect_faces(dummy_image_path)
+except Exception as e:
+  print(f"An error occurred during dummy image creation or detection: {e}")
