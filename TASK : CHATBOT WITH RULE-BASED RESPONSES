@@ -1,0 +1,35 @@
+#prompt: CHATBOT WITH RULE-BASED RESPONSES
+#Build a simple chatbot that responds to user inputs based on
+#predefined rules. Use if-else statements or pattern matching
+#techniques to identify user queries and provide appropriate
+#responses. This will give you a basic understanding of natural
+#language processing and conversation flow.
+
+def simple_chatbot():
+  """A simple rule-based chatbot."""
+  print("Hello! How can I help you today?")
+
+  while True:
+    user_input = input().lower()  #Get user input and convert to lowercase
+
+  if "hello" in user_input or "hi" in user_input:
+      print("Hello there!")
+    elif "how are you" in user_input:
+      print("I'm a chatbot, so I don't have feelings, but I'm ready to help!")
+    elif "what is your name" in user_input:
+      print("I am a simple chatbot.")
+    elif "bye" in user_input or "goodbye" in user_input:
+      print("Goodbye! Have a great day!")
+      break  # Exit the loop
+    elif "colab" in user_input:
+      print("Colab is a cloud-based platform for running Jupyter notebooks.")
+    elif "gpu" in user_input or "tpu" in user_input:
+      print("Colab provides free access to GPUs and TPUs for accelerating computation.")
+    elif "data science" in user_input:
+      print("Colab is widely used for data science tasks, including analysis and visualization.")
+    elif "machine learning" in user_input:
+      print("Colab is a popular tool for machine learning development and research.")
+    else:
+      print("I'm not sure how to respond to that. Can you rephrase?")
+
+simple_chatbot()
